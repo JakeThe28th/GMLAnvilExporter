@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "region",
-    "path": "folders/Scripts/region.yy",
+    "name": "Scripts",
+    "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "region_get_states_index",
+  "name": "state_values_same",
   "tags": [],
   "resourceType": "GMScript",
 }

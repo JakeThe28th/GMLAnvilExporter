@@ -16,43 +16,6 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 	
 	var section_list = nbt_path(chunk, ";", "Level;Sections", 1)[? "payload"]
 	
-	//Get chunk
-	//Get sections
-	//repeat for every section:
-		//read blocks using pallete
-		//pass block info into mc2obj functions
-		
-		
-	//Step 3:
-	//NEED TO HANDLE: Variable INT lengths.
-	//Read wiki stuff.
-	
-	//Get the amount of bits required to store the biggest index into the pallete
-	//Clamp it up into AT LEAST 4
-	//If it's a factor of 64, segment the value into bytes and half bytes, and read. 
-	//Factors of 64: 1, 2, 4, 8, 16, 32, 64.
-	//If it's not, clamp it UP into factors of 64.
-	//EG if it's 4 bits, read a half byte
-	//If it's 12 bits, that's 8 + 4 bits, so a byte an a half. However, it isn't a factor of 64, so clamp it up to 2 bytes, and ignore some.
-	
-	//" If the size of each index is not a factor of 64, the highest bits where no block index fits anymore are unused. "
-	
-	//also keep in mind:
-	//"Since Java Edition uses big-endian, indices inside one long are in reverse order, but the longs themselves are normally ordered. 
-	//In versions prior to 1.16, the full range of bits is used, where the remaining bits of a block index continue on the next long value."
-	
-	//My idea:
-	//Compress the longs into a single buffer, and reorder them to be correct. Then read the indexes from the buffer, using the clamps.
-	
-	//Once i do this, i'll also have to rework my blockstate exporter to work at all, but i'll first check if i'm getting blocks
-	//correctly.
-	
-	//Use tumble music
-	//Pack support
-	
-	
-	
-	//CODE ----------------------------------------
 	
 	//Get the section Y, for offsetting Y coords.
 	var section_y = 0 
@@ -92,7 +55,17 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 		
 		do {
 			
-			region_section_get_block(block_x, block_y, block_z, chunk_exp_x, chunk_exp_z, current_section)
+			//Get the states|block_id
+			var block = region_section_get_block(block_x, block_y, block_z, current_section)
+			if is_string(block) block = split_string(block, "|")
+			
+			//Coords for .obj	
+			var bl_off_x = block_x + chunk_exp_x //Offset the X coordinate
+			var bl_off_z = block_z + chunk_exp_z //Offset the Z coordinate
+			var bl_off_y = block_y + (section_y*16) //Offset Y by the section Y
+			
+			//Create block .obj
+			mc2obj_state(bl_off_x,bl_off_y,bl_off_z,block[1],block[0],obj,vertice_count,vertice_texture_count,cullfaces,mtl,mtl_index)
 			
 			block_y++
 				if block_y = 16 {
@@ -116,8 +89,5 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 			debug_log("INFO", "section done" + string(section_y))
 		
 		}
-	
-	
-	
-	//nbt_path(chunk, ";", "Leve
+
 }

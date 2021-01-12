@@ -51,10 +51,15 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 	
 	//haha sike ima just not make this until i make the mc-world-to-obj exporter since it's no longer relevant
 	
+	//transparent
 	if block_id = "minecraft:air" return -1
 	if block_id = "minecraft:cave_air" return -1
 	if block_id = "minecraft:void_air" return -1
 	if block_id = "minecraft:barrier" return -1
+	
+	//block entities
+	if block_id = "minecraft:oak_sign" return -1
+	
 	
 	if string_pos("bedrock", block_id) > 0 {
 				var error = "e"
@@ -65,8 +70,23 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 
 	var blockstate_json = json_load(file)
 	if blockstate_json != undefined {
-	var variant_ds = json_get(blockstate_json, "variants", block_states)
-	if variant_ds !=undefined {
+	if json_get(blockstate_json, "multipart")=undefined {
+		
+		if block_states != "" {
+		
+		var variant_ds = json_get(blockstate_json, "variants")
+		var variant_temp = ds_map_find_first(variant_ds)
+		repeat ds_map_size(variant_ds) {
+			
+			if state_values_same(block_states, variant_temp) break;
+			
+			variant_temp = ds_map_find_next(variant_ds, variant_temp)
+			}
+		
+		var variant_ds = json_get(variant_ds, variant_temp)
+		
+		} else var variant_ds = json_get(blockstate_json, "variants", block_states)
+		
 		if json_get(variant_ds, "model") !=undefined {
 			var model = global.ma_models_directory  + "\\" + string_replace(json_get(variant_ds, "model"), "minecraft:", "") + ".json"
 			mc2obj_model(bx, by, bz, string_replace_all(model, "/","\\"), buffer, v_count, vt_count, cullfaces, mtl, mtl_index)
@@ -80,6 +100,48 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 				}
 		} else {
 			//MULTIPART
+			var multipart_ds = json_get(blockstate_json, "multipart")
+			var states = split_string(block_states, ",")
+			var i = 0
+			repeat ds_list_size(multipart_ds) {
+				var current_conditions = ds_list_find_value(multipart_ds, i)
+				var current_conditions = ds_map_find_value(current_conditions, "when")
+				var conditions_i = 0
+				var eval = ds_map_find_first(current_conditions)
+				
+				//Eval conditions from a map.
+				repeat ds_map_size(current_conditions) {
+					//Get a condition from states that matches the one we're evaluating,
+					//then compare it to see if the value is the same.
+					var true_ = 0
+					var states_i = 0
+					do {
+						//Get
+						var condition_arr = split_string(states[states_i], "=")
+						var condition = condition_arr[0]
+						states_i++
+						} until condition = eval
+					
+					//Compare
+					if condition_arr[1] = ds_map_find_value(current_conditions, eval) {
+						true_ = true
+						} else break;
+					
+					var eval = ds_map_find_next(current_conditions, eval)
+					}
+				
+				if true_ = true {
+					var model = ds_list_find_value(multipart_ds, i)
+					var model = ds_map_find_value(model, "apply")
+					var model = ds_map_find_value(model, "model")
+					var model = global.ma_models_directory + "\\" + string_replace(model, "minecraft:", "") + ".json"
+					mc2obj_model(bx, by, bz, string_replace_all(model, "/","\\"), buffer, v_count, vt_count, cullfaces, mtl, mtl_index)
+					}
+				
+				
+				i++
+				}
+			
 			}
 		
 		if ds_exists(blockstate_json, ds_type_map) ds_map_destroy(blockstate_json)
@@ -94,9 +156,10 @@ function mc2obj_model(bx, by, bz, json, buffer, v_count, vt_count, cullfaces, mt
 	var json_ds = json_load(json)
 	if json_ds = undefined json_ds = json //If the json was loaded in already
 	
-		if string_pos("bedrock", json) > 0 {
+		if json = "Y:\AnvilExporter_544067FF_VM\OR\assets\minecraft\models\custom\misc_blocks\farming\plant_box_test.json" {
 				var error = "e"
 				}
+				
 	
 	#region Parent Handling
 		if json_ds[? "parent"] !=undefined {
@@ -118,10 +181,12 @@ function mc2obj_model(bx, by, bz, json, buffer, v_count, vt_count, cullfaces, mt
 					}
 			
 			//Replace the json's elements with the parent's elements.
-			if parent[? "elements"] !=undefined and loaded_temp	= 1 { 
-				ds_map_delete(json_ds, "elements")
+			if parent[? "elements"] !=undefined and loaded_temp	= 1 {
+				if json_ds[? "elements"] =undefined  { 
+					ds_map_delete(json_ds, "elements")
 			
-				ds_map_add_list(json_ds, "elements", parent[? "elements"])
+					ds_map_add_list(json_ds, "elements", parent[? "elements"])
+					}
 				}
 				
 				
@@ -307,6 +372,11 @@ function mc2obj_model(bx, by, bz, json, buffer, v_count, vt_count, cullfaces, mt
 			
 				//Use material
 				var mat = ds_map_find_value(texture_shorthands, temp[? "texture"])
+				
+				if mat = undefined { 
+					debug_log("MC2OBJ", "Texture not defined." )
+					mat = ds_map_find_value(mtl_index, ds_map_find_first(mtl_index))
+					}
 			
 				buffer_write(buffer, buffer_text, "usemtl " + ds_map_find_value(mtl_index, mat))
 				buffer_write(buffer, buffer_text, chr($000D) + chr($000A))

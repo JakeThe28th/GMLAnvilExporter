@@ -11,7 +11,7 @@ var buff = region
 	//var block_coord_z = b_z mod 32;
 
 	//Chunk coordinates
-	//var chunk_coord_x = floor(b_x / 16);
+	//var chunk_coord_x  = floor(b_x / 16);
 	//var chunk_coord_z = floor(b_z / 16);
 	
 	//Region file coordinates

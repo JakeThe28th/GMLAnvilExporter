@@ -13,10 +13,12 @@
 
 //58 9 64
 
-region_place_block(2, 9, 5, region_open(2, 9, 5, "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New World (1)\\region"))
+//region_place_block(2, 9, 5, region_open(2, 9, 5, "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New World (1)\\region"))
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New World\\region\\r.0.0.mca")
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\Book and Quil\\region\\r.-1.-1.mca")
-//region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\TT0RBIT\\region\\r.0.0.mca")
+region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\TT0RBIT\\region\\r.0.0.mca")
+buffer_seek(region, buffer_seek_start, 0)
+
 
 obj_out_dir = nbt_save_dir + "out.obj"
 mtl_out_dir = nbt_save_dir + "out.mtl"
@@ -42,6 +44,7 @@ global.ma_blockstates_directory = resources + "\\assets\\minecraft\\blockstates"
 
 //region_export_chunk(0,0,0,0,resources, region, obj, mtl)
 //region_export_chunk(-3,-10,0,0,resources, region, obj, mtl)
+
 region_export_chunk(0,0,0,0,resources, region, obj, mtl)
 
 buffer_save(obj, obj_out_dir)
