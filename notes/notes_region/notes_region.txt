@@ -1,0 +1,35 @@
+	//Get chunk
+	//Get sections
+	//repeat for every section:
+		//read blocks using pallete
+		//pass block info into mc2obj functions
+		
+		
+	//Step 3:
+	//NEED TO HANDLE: Variable INT lengths.
+	//Read wiki stuff.
+	
+	//Get the amount of bits required to store the biggest index into the pallete
+	//Clamp it up into AT LEAST 4
+	//If it's a factor of 64, segment the value into bytes and half bytes, and read. 
+	//Factors of 64: 1, 2, 4, 8, 16, 32, 64.
+	//If it's not, clamp it UP into factors of 64.
+	//EG if it's 4 bits, read a half byte
+	//If it's 12 bits, that's 8 + 4 bits, so a byte an a half. However, it isn't a factor of 64, so clamp it up to 2 bytes, and ignore some.
+	
+	//" If the size of each index is not a factor of 64, the highest bits where no block index fits anymore are unused. "
+	
+	//also keep in mind:
+	//"Since Java Edition uses big-endian, indices inside one long are in reverse order, but the longs themselves are normally ordered. 
+	//In versions prior to 1.16, the full range of bits is used, where the remaining bits of a block index continue on the next long value."
+	
+	//My idea:
+	//Compress the longs into a single buffer, and reorder them to be correct. Then read the indexes from the buffer, using the clamps.
+	
+	//Once i do this, i'll also have to rework my blockstate exporter to work at all, but i'll first check if i'm getting blocks
+	//correctly.
+	
+	//Use tumble music
+	
+	//EXPORT CHUNK BREAKDOWN ^^
+	//Pack support

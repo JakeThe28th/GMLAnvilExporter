@@ -1,0 +1,4 @@
+Go to chunk, 
+copy chunk data to new buffer,
+modify/read, replace by recreating the old buffer,
+copying the old data round new chunkdata
