@@ -13,6 +13,7 @@
     {"id":{"name":"read_tag_long_array","path":"scripts/read_tag_long_array/read_tag_long_array.yy",},"order":11,},
     {"id":{"name":"read_tag_float","path":"scripts/read_tag_float/read_tag_float.yy",},"order":4,},
     {"id":{"name":"read_tag_byte_array","path":"scripts/read_tag_byte_array/read_tag_byte_array.yy",},"order":5,},
+    {"id":{"name":"region_get_block","path":"scripts/region_get_block/region_get_block.yy",},"order":4,},
     {"id":{"name":"region_export_list","path":"scripts/region_export_list/region_export_list.yy",},"order":12,},
     {"id":{"name":"read_tag_string","path":"scripts/read_tag_string/read_tag_string.yy",},"order":6,},
     {"id":{"name":"read_tag_double","path":"scripts/read_tag_double/read_tag_double.yy",},"order":7,},

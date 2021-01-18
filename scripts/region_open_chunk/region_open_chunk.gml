@@ -1,6 +1,5 @@
 ///region_place_block(x, y, z, region_folder)
 function region_open_chunk(chunk_coord_x, chunk_coord_z, region) {
-
 var buff = region
 	
 #region Get coordinates
@@ -49,12 +48,12 @@ var buff = region
 		buffer_delete(offset_buffer)
 
 	//Get the length of the chunk data in 4096 increments.
-	var length = buffer_read(buff, buffer_s8)
+	var length = buffer_read(buff, buffer_u8)
 
 #endregion
 
 	//Determine whether or not the chunk has been generated
-	if length = 0 show_error("Chunk hasn't been generated yet", false)
+	if length = 0 debug_log("MCANVIL", "Chunk hasn't been generated yet") //show_error("Chunk hasn't been generated yet", false)
 	if length = 0 return -2
 
 #region Get chunk data and decompress
@@ -78,13 +77,19 @@ var buff = region
 	var chunk_save_dir = string(nbt_save_dir + string(chunk_coord_x)+","+string(chunk_coord_z)+".mcc")
 
 	if file_exists(chunk_save_dir) file_delete(chunk_save_dir) //If chunk is saved delete it.
+	
+	if chunk_data <0 {
+		debug_log("MCANVIL", "Error with reading chunk data." + "X" + string(chunk_coord_x) + "Z" + string(chunk_coord_z))
+		return -1
+		}
+	
 	buffer_save(chunk_data, chunk_save_dir) //Save chunk to file
-	var nbt = nbt_start_from_buffer(chunk_data) //Read chunk
+	//var nbt = nbt_start_from_buffer(chunk_data) //Read chunk
 
 	buffer_delete(chunk_data) //Unload chunk buffer
-	buffer_delete(buff) //Unload region file
+	//buffer_delete(buff) //Unload region file
 
-	return nbt 
+	//return nbt 
 	
 	
 

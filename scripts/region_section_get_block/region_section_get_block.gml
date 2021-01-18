@@ -6,10 +6,14 @@ function region_section_get_block(block_x, block_y, block_z, section){
 				
 		
 		//Get block data DS and Palette DS.
-		var blockstates = nbt_path(section, ";","BlockStates",0)[? "payload"]
-		var palette = nbt_path(section, ";","Palette",0)[? "payload"]
+		var blockstates = nbt_path(section, ";","BlockStates",0)
+		
+		var palette = nbt_path(section, ";","Palette",0)
 		
 		if blockstates <0 or palette <0 return -1
+		
+		blockstates = blockstates[? "payload"]
+		palette = palette[? "payload"]
 		
 		//Read section data.
 			

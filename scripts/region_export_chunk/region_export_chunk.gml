@@ -57,6 +57,8 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 			
 			//Get the states|block_id
 			var block = region_section_get_block(block_x, block_y, block_z, current_section)
+			if block != -1 {
+				
 			if is_string(block) block = split_string(block, "|")
 			
 			//Coords for .obj	
@@ -66,6 +68,8 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 			
 			//Create block .obj
 			mc2obj_state(bl_off_x,bl_off_y,bl_off_z,block[1],block[0],obj,vertice_count,vertice_texture_count,cullfaces,mtl,mtl_index)
+			
+			}
 			
 			block_y++
 				if block_y = 16 {
