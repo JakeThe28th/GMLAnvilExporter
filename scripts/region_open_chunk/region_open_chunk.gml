@@ -24,8 +24,10 @@ var buff = region
 		//Handle negative coordinates
 		if index_x < 0 or index_z < 0 { index_x += 32; index_z += 32 } //If coordinates are negative, add 32.
 		//math
-		var index = index_x + index_z
-		index = 4 * (index *32)
+		///var index = index_x + index_z
+		///index = 4 * (index *32)
+		
+		var index = 4 * ((index_x mod 32) + (index_z mod 32) * 32)
 	
 #endregion
 
