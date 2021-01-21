@@ -18,8 +18,13 @@ function region_display_chunk(chunk_x, chunk_z, pix_x, pix_y, block_textures, re
 		
 	var chunk = nbt_start(chunk_filename)
 	
-	var heightmaps = nbt_path(chunk, ";", "Level;Heightmaps;WORLD_SURFACE", 1)[? "payload"]
+	var heightmaps = nbt_path(chunk, ";", "Level;Heightmaps", 1)[? "payload"]
+	if  ds_list_size(heightmaps) > 0 {
 	
+	var heightmaps = nbt_path(chunk, ";", "Level;Heightmaps;WORLD_SURFACE", 1) 
+	if  heightmaps > -1 heightmaps = heightmaps[? "payload"] else heightmaps = nbt_path(chunk, ";", "Level;Heightmaps;WORLD_SURFACE_WG", 1)[? "payload"]
+	
+		} else return -1
 	
 	var block_x = 0
 	var block_z = 0
@@ -35,27 +40,6 @@ function region_display_chunk(chunk_x, chunk_z, pix_x, pix_y, block_textures, re
 	var startbit = ceil((index mod indexes_per_long) * bits)	
 	var y_level = (heightmaps[| long_index]) >> startbit & clean //Get the block's Y level.
 	
-	
-	
-	var section_y = floor(y_level/16)
-
-	var ind = region_section_get_block(block_x, floor(y_level/16), block_z, region_chunk_get_section(floor(section_y), chunk))
-	var ind = split_string(ind, "|")[1]
-	
-	var col = c_white
-	
-	//switch (ind) {
-	//	case "minecraft:stone": var col = c_gray break;
-	//	case "minecraft:snow": var col = c_white break;
-	//	case "minecraft:spruce_leaves": var col = c_green break;
-	//	case "minecraft:grass_block": var col = c_lime break;
-	//	}
-	
-	
-	var hue = color_get_hue(col)
-	var sat = color_get_saturation(col)
-	
-	draw_point_color(block_x,block_z,make_color_hsv(hue, sat, y_level))
 	
 	 block_x++
 	 if block_x = chunk_size {

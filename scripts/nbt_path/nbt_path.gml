@@ -4,6 +4,8 @@ function nbt_path(ds, seperator, path, start_type) {
 	//This script requires util_split_string
 	//types: map_only, list_only, both
 	
+	if ds = undefined return -1
+	
 	path = split_string(path, seperator)
 	
 	var i = 0

@@ -58,10 +58,18 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 	if block_id = "minecraft:barrier" return -1
 	
 	//block entities
-	if block_id = "minecraft:oak_sign" return -1
+	if string_pos("sign", block_id) >0 return -1
 	
 	
 	if string_pos("bedrock", block_id) > 0 {
+				var error = "e"
+				}
+				
+	if string_pos("water", block_id) > 0 {
+				var error = "e"
+				}
+				
+	if string_pos("lava", block_id) > 0 {
 				var error = "e"
 				}
 
@@ -78,10 +86,12 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 		var variant_temp = ds_map_find_first(variant_ds)
 		repeat ds_map_size(variant_ds) {
 			
-			if state_values_same(block_states, variant_temp) break;
+			if variant_temp != "" then if state_values_same(block_states, variant_temp) break;
 			
 			variant_temp = ds_map_find_next(variant_ds, variant_temp)
 			}
+		
+		if variant_temp = undefined variant_temp = ds_map_find_first(variant_ds)
 		
 		var variant_ds = json_get(variant_ds, variant_temp)
 		
@@ -106,6 +116,8 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 			repeat ds_list_size(multipart_ds) {
 				var current_conditions = ds_list_find_value(multipart_ds, i)
 				var current_conditions = ds_map_find_value(current_conditions, "when")
+				
+				if current_conditions != undefined {
 				var conditions_i = 0
 				var eval = ds_map_find_first(current_conditions)
 				
@@ -129,6 +141,8 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 					
 					var eval = ds_map_find_next(current_conditions, eval)
 					}
+					
+				} else true_ = true
 				
 				if true_ = true {
 					var model = ds_list_find_value(multipart_ds, i)
@@ -242,7 +256,7 @@ function mc2obj_model(bx, by, bz, json, buffer, v_count, vt_count, cullfaces, mt
 				namespace_valid = 1
 				}		
 			if string_pos("minecraft", textures[? texture_temp]) > 0 { 
-				var texture_path = string_replace_all(textures[? texture_temp], "minecraft:", global.ma_textures_directory) + ".png"
+				var texture_path = string_replace_all(textures[? texture_temp], "minecraft:", global.ma_textures_directory + "\\") + ".png"
 				
 				mc2obj_mtl(mtl, mtl_index, textures[? texture_temp], texture_path)
 				namespace_valid = 1
@@ -366,7 +380,8 @@ function mc2obj_model(bx, by, bz, json, buffer, v_count, vt_count, cullfaces, mt
 			
 			//If (Face culling mumbo jumbo)
 			#region Build a face
-			if ds_map_find_value(cullfaces, face) = 0 and ds_map_exists(temp, "cullface") and ds_list_find_index(ds_map_find_value(obj_gui.export_options_values, "selected"), 1) > -1 {
+			//if ds_map_find_value(cullfaces, face) = 0 and ds_map_exists(temp, "cullface") and ds_list_find_index(ds_map_find_value(obj_gui.export_options_values, "selected"), 1) > -1 {
+			if ds_map_find_value(cullfaces, face) = 0 and ds_map_exists(temp, "cullface") {
 					//debug_log("MC2OBJ", "Culled face " + face + " " + string(ds_map_find_value(surrounding, face)))
 				} else {
 			

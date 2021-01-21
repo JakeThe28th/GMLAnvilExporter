@@ -53,10 +53,78 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 		
 		#endregion
 		
+		//Get block data DS and Palette DS.
+		var blockstates = nbt_path(current_section, ";","BlockStates",0)
+		var palette = nbt_path(current_section, ";","Palette",0)
+		
+	if section_y < 4 blockstates = -1
+		
+	if blockstates >= 0 and palette >= 0 {
+		blockstates = blockstates[? "payload"]
+		palette = palette[? "payload"]
+			
+		//Get the number of bits required to store the highest palette index. 
+		//If it's less than 4 bits, clamp it to 4 bits, since that's the minimum.
+		var index_size = clamp(ceil(log2(ds_list_size(palette)) / log2(2)), 4, 512)
+		
+		var temp = undefined
+		var i_air = 0
 		do {
 			
-			//Get the states|block_id
-			var block = region_section_get_block(block_x, block_y, block_z, current_section)
+			temp = nbt_path(palette[| i_air],";","Name",0)[? "payload"][? "payload"]
+		
+			i_air++
+			} until string_pos("air", temp) > 0 or i_air >= ds_list_size(palette)
+			
+			i_air--
+		
+		//Loop through blocks.
+		do {
+			
+			#region Get the states|block_id	
+
+			//Use script to get palette index.
+			var block = region_blockstates_get_index(block_x, block_y, block_z, blockstates, index_size)
+			
+			if block != i_air {
+			
+				if palette[| block] = undefined then debug_log("Error", "Pallete index undefined")
+				
+
+
+			//Get the block id, and create a variable for blockstates
+			var states = ""
+			var block_id = nbt_path(palette[| block],";","Name",0)[? "payload"][? "payload"]
+			
+			//Get the properties DS
+			var block_properties = nbt_path(palette[| block],";","Properties",0)
+			
+				
+		#region Repeat through properties, add to string.
+		if block_properties > -1 {
+			var properties_i = 0
+			block_properties = block_properties[? "payload"]
+			var prefix_properties = ""
+					
+				//Loop
+				repeat ds_list_size(block_properties) {
+					var current_property = block_properties[| properties_i]
+					var current_string_tag = current_property[? "payload"]
+					
+					states += prefix_properties+string(current_property[? "name"])+"="+string(current_string_tag[? "payload"])
+					
+					//Adds a comma if there's more than one state
+					prefix_properties = ","
+					properties_i++
+					}
+				}
+				
+			#endregion
+				
+			block = string(states + "|" + block_id)
+			
+			#endregion
+		
 			if block != -1 {
 				
 			if is_string(block) block = split_string(block, "|")
@@ -66,8 +134,21 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 			var bl_off_z = block_z + chunk_exp_z //Offset the Z coordinate
 			var bl_off_y = block_y + (section_y*16) //Offset Y by the section Y
 			
+			
+			//Cullfaces
+			
+			
+			cullfaces[? "north"] = region_block_is_transparent(block_x, block_y, block_z-1, blockstates, index_size, i_air, palette)
+			cullfaces[? "east"] = region_block_is_transparent(block_x+1, block_y, block_z, blockstates, index_size, i_air, palette)
+			cullfaces[? "south"] = region_block_is_transparent(block_x, block_y, block_z+1, blockstates, index_size, i_air, palette)
+			cullfaces[? "west"] = region_block_is_transparent(block_x-1, block_y, block_z, blockstates, index_size, i_air, palette)
+			cullfaces[? "up"] = region_block_is_transparent(block_x, block_y+1, block_z, blockstates, index_size, i_air, palette)
+			cullfaces[? "down"] = region_block_is_transparent(block_x, block_y-1, block_z, blockstates, index_size, i_air, palette)
+			
 			//Create block .obj
 			mc2obj_state(bl_off_x,bl_off_y,bl_off_z,block[1],block[0],obj,vertice_count,vertice_texture_count,cullfaces,mtl,mtl_index)
+			
+			}
 			
 			}
 			
@@ -88,6 +169,7 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 
 					
 			} until block_x = "done"
+			}
 			
 			i++
 			debug_log("INFO", "section done" + string(section_y))
