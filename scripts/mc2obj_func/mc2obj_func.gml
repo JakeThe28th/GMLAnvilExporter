@@ -41,16 +41,7 @@ function mc2obj_mtl(mtl, mtl_index, texture_name, texture_path) {
 }
 
 function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_count, cullfaces, mtl, mtl_index) {
-	//Starts building a block based on an ID, model and blockstates
-	//Handles multipart, random selection, etc.
-	
-	//If block namespace is dungeons:
-	//mc2obj_build_block_json
-	
-	//Also, dont forget to add the missing block blocks
-	
-	//haha sike ima just not make this until i make the mc-world-to-obj exporter since it's no longer relevant
-	
+
 	//transparent
 	if block_id = "minecraft:air" return -1
 	if block_id = "minecraft:cave_air" return -1

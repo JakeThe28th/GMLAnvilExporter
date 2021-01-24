@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "utility",
-    "path": "folders/Scripts/utility.yy",
+    "name": "Scripts",
+    "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "compress_gzip_7z",
+  "name": "gui_functions",
   "tags": [],
   "resourceType": "GMScript",
 }

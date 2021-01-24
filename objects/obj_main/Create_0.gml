@@ -18,6 +18,7 @@
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\Book and Quil\\region\\r.-1.-1.mca")
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\TT0RBIT\\region\\r.0.0.mca")
 region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\region\\r.-1.-1.mca")
+global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\"
 buffer_seek(region, buffer_seek_start, 0)
 
 
@@ -51,8 +52,17 @@ global.ma_blockstates_directory = resources + "\\assets\\minecraft\\blockstates"
 //region_export_chunk(0,0,0,0,resources, region, obj, mtl)
 
 
-chunk_sprite_ds = ds_map_create()
+//chunk_sprite_ds = ds_map_create()
 
-miblockcolors = json_load(working_directory + "blockpreview.midata")
+//miblockcolors = json_load(working_directory + "blockpreview.midata")
 
-spritetemp = -1
+//spritetemp = -1
+
+ds_chunk_sprites = ds_map_create()
+ds_regions = ds_map_create()
+
+
+chunk_x_view=0
+chunk_z_view=0
+
+timeout=0

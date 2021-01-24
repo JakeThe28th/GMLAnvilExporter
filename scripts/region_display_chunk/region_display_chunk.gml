@@ -40,6 +40,7 @@ function region_display_chunk(chunk_x, chunk_z, pix_x, pix_y, block_textures, re
 	var startbit = ceil((index mod indexes_per_long) * bits)	
 	var y_level = (heightmaps[| long_index]) >> startbit & clean //Get the block's Y level.
 	
+	draw_point_color(block_x, block_z, make_color_hsv(0, 0, y_level))
 	
 	 block_x++
 	 if block_x = chunk_size {
