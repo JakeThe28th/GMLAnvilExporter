@@ -17,10 +17,11 @@
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New World\\region\\r.0.0.mca")
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\Book and Quil\\region\\r.-1.-1.mca")
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\TT0RBIT\\region\\r.0.0.mca")
-region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\region\\r.-1.-1.mca")
+//region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\region\\r.-1.-1.mca")
 //global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\"
-global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New World\\"
-buffer_seek(region, buffer_seek_start, 0)
+//global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New World\\"
+global.save_folder = "none"
+//buffer_seek(region, buffer_seek_start, 0)
 
 
 //obj_out_dir = nbt_save_dir + "out.obj"
@@ -43,7 +44,7 @@ cullfaces = ds_map_create()
 	cullfaces[? "up"] = 1
 	cullfaces[? "down"] = 1
 
-global.ma_textures_directory =  resources + "\\assets\\minecraft\\textures"
+global.ma_textures_directory = resources + "\\assets\\minecraft\\textures"
 global.ma_models_directory = resources + "\\assets\\minecraft\\models"
 global.ma_blockstates_directory = resources + "\\assets\\minecraft\\blockstates"
 
@@ -67,3 +68,8 @@ chunk_x_view=0
 chunk_z_view=0
 
 timeout=0
+
+grayed_out_buttons = false
+global.current_menu = false
+
+directory_destroy(nbt_save_dir)

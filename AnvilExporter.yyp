@@ -20,6 +20,7 @@
     {"id":{"name":"region_open","path":"scripts/region_open/region_open.yy",},"order":3,},
     {"id":{"name":"mc2obj_func","path":"scripts/mc2obj_func/mc2obj_func.yy",},"order":5,},
     {"id":{"name":"read_tag_list","path":"scripts/read_tag_list/read_tag_list.yy",},"order":8,},
+    {"id":{"name":"macros","path":"scripts/macros/macros.yy",},"order":9,},
     {"id":{"name":"read_tag_compound","path":"scripts/read_tag_compound/read_tag_compound.yy",},"order":9,},
     {"id":{"name":"notes_region","path":"notes/notes_region/notes_region.yy",},"order":4,},
     {"id":{"name":"region_display_mca","path":"scripts/region_display_mca/region_display_mca.yy",},"order":1,},

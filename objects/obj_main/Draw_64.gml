@@ -24,6 +24,8 @@ var inc_x = 0
 var maxz = vh/(chunk_size*scale)
 var maxx = vw/(chunk_size*scale)
 
+if global.save_folder != "none" {
+#region Display chunks
 
 timer = current_time + 200
 do {
@@ -76,3 +78,33 @@ do {
 		inc_z++
 		}
 	} until inc_z = maxz //or current_time > timer
+
+
+#endregion
+	}
+	
+if gui_draw_button((vw/2)-(vw/3), 0, (vw/2)+(vw/3), 40, col_normal, col_med_light, string(global.save_folder), mouse_x, mouse_y, "none.") {
+	var file = get_open_filename("Minecraft Level files|*.dat", "level.dat")
+	global.save_folder = filename_path(file)
+	directory_destroy(nbt_save_dir)
+	
+	var temp = ds_map_find_first(ds_regions)
+	repeat ds_map_size(ds_regions) {
+		var temp1 = temp
+		temp = ds_map_find_next(ds_regions, temp)
+		buffer_delete(ds_regions[? temp1])
+		ds_map_delete(ds_regions, temp1)
+		}	
+		//ds_map_destroy(ds_regions)
+	
+	var temp = ds_map_find_first(ds_chunk_sprites)
+	repeat ds_map_size(ds_chunk_sprites) {
+		var temp1 = temp
+		temp = ds_map_find_next(ds_chunk_sprites, temp)
+		sprite_delete(ds_chunk_sprites[? temp1])
+		ds_map_delete(ds_chunk_sprites, temp1)
+		}	
+		//ds_map_destroy(ds_chunk_sprites)
+		
+		
+	}
