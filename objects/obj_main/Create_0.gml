@@ -18,7 +18,8 @@
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\Book and Quil\\region\\r.-1.-1.mca")
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\TT0RBIT\\region\\r.0.0.mca")
 region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\region\\r.-1.-1.mca")
-global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\"
+//global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\"
+global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New World\\"
 buffer_seek(region, buffer_seek_start, 0)
 
 

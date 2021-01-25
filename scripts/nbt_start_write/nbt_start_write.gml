@@ -4,6 +4,9 @@ function nbt_start_write(argument0) {
 	var ds_map = argument0
 	var buff = buffer_create(1, buffer_grow, 1)
 	buffer_seek(buff, buffer_seek_start, 0)
+	
+	//IF IT STARTS CRASHING WHEN TRYING TO WRITE, CAN SOMEONE REMIND ME THAT I NEED
+	//TO FIX THIS TO DEAL WITH UPDATED STRINGS, BYTE ARRAYS, AND INT/LONG ARRAYS NEED TO BE ADDED
 
 	//var name_length = ds_map_find_value(ds_map, "name_length")
 	//var name = ds_map_find_value(ds_map, "name")

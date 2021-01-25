@@ -35,7 +35,9 @@ function nbt_start_from_buffer(argument0) {
 
 
 #region Get tag name
-		var name_ds = read_tag_string(buff) //Get  the name's DS map
+		var name_ds = ds_map_create()
+		read_tag_string(buff, name_ds) //Get  the name's DS map
+		
 		var tag_name = ds_map_find_value(name_ds, "payload") //Get the name
 		var tag_name_length = ds_map_find_value(name_ds, "length") //Get the name's length
 	#endregion

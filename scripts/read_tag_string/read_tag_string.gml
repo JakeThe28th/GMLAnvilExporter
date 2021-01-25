@@ -1,6 +1,6 @@
 ///read_tag_string(buff)
 ///@param buff
-function read_tag_string(argument0) {
+function read_tag_string(argument0, tag_ds) {
 	var buffer = argument0
 
 
@@ -17,14 +17,14 @@ function read_tag_string(argument0) {
 	
 	buffer_seek(tbuff, buffer_seek_start, 0)
 
-	var return_ds = ds_map_create()
-	ds_map_add(return_ds, "payload", buffer_read(tbuff, buffer_text))
-	ds_map_add(return_ds, "length", length)
+	//var return_ds = ds_map_create()
+	ds_map_add(tag_ds, "payload", buffer_read(tbuff, buffer_text))
+	ds_map_add(tag_ds, "length", length)
 	//Add payload and length to the return DS map.
 
 	buffer_delete(tbuff)
 
-	return return_ds
+	//return return_ds
 	//Go to the beginning of 'tbuff' and read as text! Need to put text in new buffer due to
 	//there being no null character at the end.
 

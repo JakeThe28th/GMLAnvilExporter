@@ -21,9 +21,27 @@ function read_tag_list(argument0, argument1, argument2, argument3) {
 			case 4: payload = read_tag_long(buffer); ds_list_add(ds_list, payload); break;
 			case 5: payload = read_tag_float(buffer); ds_list_add(ds_list, payload); break;
 			case 6: payload = read_tag_double(buffer); ds_list_add(ds_list, payload); break;
-			case 7: payload = read_tag_byte_array(buffer); ds_list_add(ds_list, payload); ds_list_mark_as_map(ds_list, ds_list_size(ds_list)-1); break;
-			case 8: payload = read_tag_string(buffer); ds_list_add(ds_list, payload); ds_list_mark_as_map(ds_list, ds_list_size(ds_list)-1); break;
-		
+			
+			
+			case 7:
+				payload = ds_map_create()
+				read_tag_byte_array(buffer, payload); ds_list_add(ds_list, payload); ds_list_mark_as_map(ds_list, ds_list_size(ds_list)-1);
+				break;
+			case 8: 
+				payload = ds_map_create()
+				read_tag_string(buffer, payload); ds_list_add(ds_list, payload); ds_list_mark_as_map(ds_list, ds_list_size(ds_list)-1); 
+				break;
+			
+			case 11: 
+				payload = ds_map_create()
+				read_tag_int_array(buffer, payload); 
+				break;
+				
+			case 12: 
+				payload = ds_map_create()
+				read_tag_long_array(buffer, payload); 
+				break;
+			
 			case 9: 
 		#region List tag
 			payload = ds_list_create(); 
@@ -45,7 +63,7 @@ function read_tag_list(argument0, argument1, argument2, argument3) {
 		#endregion
 			break;
 		
-			default: debug_log("NBT: Unknown tag. "); break;
+			default: debug_log("NBT", "NBT: Unknown tag. "); break;
 			}
 		}
 
