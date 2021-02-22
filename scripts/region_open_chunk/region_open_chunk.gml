@@ -1,6 +1,8 @@
 ///region_place_block(x, y, z, region_folder)
 function region_open_chunk(chunk_coord_x, chunk_coord_z, region) {
 var buff = region
+if region = -1 return -1
+if buffer_get_size(region) = 0 return -1 //Make sure buffer isn't empty
 	
 #region Get coordinates
 
@@ -28,6 +30,7 @@ var buff = region
 		///index = 4 * (index *32)
 		
 		var index = 4 * ((index_x mod 32) + (index_z mod 32) * 32)
+		//var index = 4 * ((index_x & 31) + (index_z & 31) * 32)
 	
 #endregion
 
@@ -69,6 +72,7 @@ var buff = region
 	buffer_seek(buff, buffer_seek_start, offset*4096)
 	var chunk_data_compressed = buffer_create(bytecount, buffer_fixed, 1)
 	buffer_copy(buff, (offset*4096)+5, bytecount-5, chunk_data_compressed, 0)
+	//buffer_copy(buff, (offset*4096), bytecount, chunk_data_compressed, 0)
 
 	//Decompress the chunk data
 	var chunk_data = buffer_decompress(chunk_data_compressed)

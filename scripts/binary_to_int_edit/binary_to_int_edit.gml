@@ -12,7 +12,7 @@ function binary_to_int_edit(argument0) {
 	      Int += power(2,ii);
 		  ii++
 	  }
-	  show_debug_message("Int: "+string(Int));
+	  //show_debug_message("Int: "+string(Int));
   
 	//https://www.reddit.com/r/gamemaker/comments/46cjvv/created_two_scripts_binary_conversion_and_integer/
 	return Int

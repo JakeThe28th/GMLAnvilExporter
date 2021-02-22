@@ -26,13 +26,13 @@ global.save_folder = "none"
 
 //obj_out_dir = nbt_save_dir + "out.obj"
 //mtl_out_dir = nbt_save_dir + "out.mtl"
-obj_out_dir = nbt_save_dir + ""
-mtl_out_dir = nbt_save_dir + ""
+//obj_out_dir = nbt_save_dir + ""
+//mtl_out_dir = nbt_save_dir + ""
 //obj = buffer_create(1, buffer_grow, 1)
 //mtl = file_text_open_write(mtl_out_dir)
-mtl_index = ds_map_create()
-vertice_count = 0
-vertice_texture_count = 0
+//mtl_index = ds_map_create()
+//vertice_count = 0
+//vertice_texture_count = 0
 //resources = working_directory + "1.16.1"
 resources = "OR" //working_directory + "OR"
 
@@ -48,10 +48,14 @@ global.ma_textures_directory = resources + "\\assets\\minecraft\\textures"
 global.ma_models_directory = resources + "\\assets\\minecraft\\models"
 global.ma_blockstates_directory = resources + "\\assets\\minecraft\\blockstates"
 
+
 //region_export_chunk(0,0,0,0,resources, region, obj, mtl)
 //region_export_chunk(-3,-10,0,0,resources, region, obj, mtl)
 
 //region_export_chunk(0,0,0,0,resources, region, obj, mtl)
+
+//buffer_save(obj, obj_out_dir)
+//file_text_close(mtl)
 
 
 //chunk_sprite_ds = ds_map_create()
@@ -60,7 +64,7 @@ global.ma_blockstates_directory = resources + "\\assets\\minecraft\\blockstates"
 
 //spritetemp = -1
 
-ds_chunk_sprites = ds_map_create()
+ds_chunk_display_instances = ds_map_create()
 ds_regions = ds_map_create()
 
 
@@ -73,3 +77,6 @@ grayed_out_buttons = false
 global.current_menu = false
 
 directory_destroy(nbt_save_dir)
+
+instance_create_depth(0, 0, -6, obj_view_move)
+instance_create_depth(0, 0, -6, obj_camera)

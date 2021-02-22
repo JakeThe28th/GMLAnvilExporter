@@ -2,12 +2,11 @@
 ///@param file_path
 function nbt_start(argument0) {
 	var file_path = argument0
-	lib_gz()
 
 	var buff = buffer_load(file_path)
 	var nbt_ds = ds_map_create()
 		buffer_seek(buff, buffer_seek_start, 0)
-		debug_log("NBT", "NBT: Starting to read NBT File: '" + string(file_path) + "'")
+		//debug_log("NBT", "NBT: Starting to read NBT File: '" + string(file_path) + "'")
 		//Load the file into a buffer, create a ds map for the result, then go to the start of the buffer.
 
 
@@ -47,7 +46,7 @@ function nbt_start(argument0) {
 
 	read_tag_compound(buff, tag_payload)
 
-	debug_log("NBT", "NBT: Finished reading NBT file. DS map result: '" + string(nbt_ds) + "'")
+	//debug_log("NBT", "NBT: Finished reading NBT file. DS map result: '" + string(nbt_ds) + "'")
 
 	return nbt_ds
 	a = "b"

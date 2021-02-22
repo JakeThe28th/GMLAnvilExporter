@@ -1,0 +1,1 @@
+global.base = current_time

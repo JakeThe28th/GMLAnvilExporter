@@ -11,30 +11,30 @@ function mc2obj_mtl(mtl, mtl_index, texture_name, texture_path) {
 			#region mtl nonsense
 				file_text_write_string(mtl, "newmtl " + texture_name)
 				file_text_writeln(mtl)
-				file_text_write_string(mtl, "# Ns 0")
-				file_text_writeln(mtl)
-				file_text_write_string(mtl, "# Ka 0.2 0.2 0.2")
-				file_text_writeln(mtl)
-				file_text_write_string(mtl, "Kd 1 1 1")
-				file_text_writeln(mtl)
-				file_text_write_string(mtl, "Ks 0 0 0")
-				file_text_writeln(mtl)
+				//file_text_write_string(mtl, "# Ns 0")
+				//file_text_writeln(mtl)
+				//file_text_write_string(mtl, "# Ka 0.2 0.2 0.2")
+				//file_text_writeln(mtl)
+				//file_text_write_string(mtl, "Kd 1 1 1")
+				//file_text_writeln(mtl)
+				//file_text_write_string(mtl, "Ks 0 0 0")
+				//file_text_writeln(mtl)
 				file_text_write_string(mtl, "# map_Ka " + texture_path)
 				file_text_writeln(mtl)
-				file_text_write_string(mtl, "# for G3D, to make textures look blocky:")
-				file_text_writeln(mtl)
-				file_text_write_string(mtl, "interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION")
-				file_text_writeln(mtl)
-				file_text_write_string(mtl, "map_Kd " + texture_path)
-				file_text_writeln(mtl)
-				file_text_write_string(mtl, "# illum 2")
-				file_text_writeln(mtl)
-				file_text_write_string(mtl, "# d 1")
-				file_text_writeln(mtl)
-				file_text_write_string(mtl, "# Tr 0")
-				file_text_writeln(mtl)
-				file_text_writeln(mtl)
-				file_text_writeln(mtl)
+				//file_text_write_string(mtl, "# for G3D, to make textures look blocky:")
+				//file_text_writeln(mtl)
+				//file_text_write_string(mtl, "interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION")
+				//file_text_writeln(mtl)
+				//file_text_write_string(mtl, "map_Kd " + texture_path)
+				//file_text_writeln(mtl)
+				//file_text_write_string(mtl, "# illum 2")
+				//file_text_writeln(mtl)
+				//file_text_write_string(mtl, "# d 1")
+				//file_text_writeln(mtl)
+				//file_text_write_string(mtl, "# Tr 0")
+				//file_text_writeln(mtl)
+				//file_text_writeln(mtl)
+				//file_text_writeln(mtl)
 			#endregion
 				
 			}
@@ -109,7 +109,6 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 				var current_conditions = ds_map_find_value(current_conditions, "when")
 				
 				if current_conditions != undefined {
-				var conditions_i = 0
 				var eval = ds_map_find_first(current_conditions)
 				
 				//Eval conditions from a map.
@@ -160,11 +159,6 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 function mc2obj_model(bx, by, bz, json, buffer, v_count, vt_count, cullfaces, mtl, mtl_index) {
 	var json_ds = json_load(json)
 	if json_ds = undefined json_ds = json //If the json was loaded in already
-	
-		if json = "Y:\AnvilExporter_544067FF_VM\OR\assets\minecraft\models\custom\misc_blocks\farming\plant_box_test.json" {
-				var error = "e"
-				}
-				
 	
 	#region Parent Handling
 		if json_ds[? "parent"] !=undefined {

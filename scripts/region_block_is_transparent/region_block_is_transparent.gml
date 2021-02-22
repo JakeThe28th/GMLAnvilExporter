@@ -37,5 +37,8 @@ function region_block_is_transparent(block_x, block_y, block_z, blockstates, ind
 	if string_pos("blue_orchid",temp) > 1 return 1
 	if string_pos("tulip",temp) > 1 return 1
 	if string_pos("tripwire",temp) > 1 return 1
+	if string_pos("berry",temp) > 1 return 1
+	if string_pos("bush",temp) > 1 return 1
+	if string_pos("barrier",temp) > 1 return 1
 	return 0
 }

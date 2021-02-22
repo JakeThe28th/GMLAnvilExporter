@@ -1,4 +1,15 @@
-function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resources_dir, region, obj, mtl) {
+#define region_export_chunk_EXT 
+//(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resources_dir, region, obj, mtl)
+	var chunk_x = argument0
+	var chunk_z = argument1
+	var chunk_exp_x = argument2
+	var chunk_exp_z = argument3
+	var resources_dir = argument4
+	var region = argument5
+	var obj = argument6
+	var mtl = argument7
+	
+	
 	
 	var chunk_filename = nbt_save_dir + string(chunk_x)+","+string(chunk_z)+".mcc"
 	
@@ -57,7 +68,7 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 		var blockstates = nbt_path(current_section, ";","BlockStates",0)
 		var palette = nbt_path(current_section, ";","Palette",0)
 		
-	//if section_y < 4 blockstates = -1
+	if section_y < 4 blockstates = -1
 		
 	if blockstates >= 0 and palette >= 0 {
 		blockstates = blockstates[? "payload"]
@@ -174,5 +185,3 @@ function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resourc
 			debug_log("INFO", "section done" + string(section_y))
 		
 		}
-
-}

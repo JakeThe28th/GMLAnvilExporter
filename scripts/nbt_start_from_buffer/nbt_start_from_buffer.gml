@@ -4,8 +4,6 @@ function nbt_start_from_buffer(argument0) {
 	var buff = argument0
 	buffer_save(buff, working_directory + "temp.nbt")
 
-	lib_gz()
-
 	var nbt_ds = ds_map_create()
 		buffer_seek(buff, buffer_seek_start, 0)
 		debug_log("NBT", "NBT: Starting to read NBT from buffer.")
