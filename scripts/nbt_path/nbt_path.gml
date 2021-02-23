@@ -5,21 +5,16 @@ function nbt_path(ds, seperator, path, start_type) {
 	//types: map_only, list_only, both
 	
 	if ds = undefined return -1
-	
 	path = split_string(path, seperator)
 	
 	var i = 0
 	var name_temp;
 	repeat array_length(path) {	
-		
 		var name_i = 0
-		
 		//start type: 0 = list, 1 = map
 		if start_type { 
 			ds = ds[? "payload"]
 			}
-		
-		//if ds[? "type"] = 10 ds = ds[? "payload"]
 		
 		do {
 			name_temp = ds_map_find_value(ds[| name_i], "name")
@@ -30,15 +25,12 @@ function nbt_path(ds, seperator, path, start_type) {
 		name_i-=1
 			
 		if name_i >= ds_list_size(ds) return -1
-		if name_temp != path[i] return -1
-		
+		//if name_temp != path[i] return -1
 		
 		ds = ds[| name_i]
-		
 		start_type = true
 		
 		i++
 		}
-		
 		return ds
 }

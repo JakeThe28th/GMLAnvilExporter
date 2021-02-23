@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function region_display_chunk(chunk_x, chunk_z, pix_x, pix_y, block_textures, region){
+function region_display_chunk_fast(chunk_x, chunk_z, pix_x, pix_y, block_textures, region){
 	
 	var chunk_filename = nbt_save_dir + string(chunk_x)+","+string(chunk_z)+".mcc"
 	
@@ -16,15 +16,19 @@ function region_display_chunk(chunk_x, chunk_z, pix_x, pix_y, block_textures, re
 		}
 	
 		
-	var chunk = nbt_start(chunk_filename)
+	//var chunk = nbt_start(chunk_filename)
 	
-	var heightmaps = nbt_path(chunk, ";", "Level;Heightmaps", 1)[? "payload"]
-	if  ds_list_size(heightmaps) > 0 {
+	//var heightmaps = nbt_path(chunk, ";", "Level;Heightmaps", 1)[? "payload"]
+	//if  ds_list_size(heightmaps) > 0 {
 	
-	var heightmaps = nbt_path(chunk, ";", "Level;Heightmaps;WORLD_SURFACE", 1) 
-	if  heightmaps > -1 heightmaps = heightmaps[? "payload"] else heightmaps = nbt_path(chunk, ";", "Level;Heightmaps;WORLD_SURFACE_WG", 1)[? "payload"]
+	//var heightmaps = nbt_path(chunk, ";", "Level;Heightmaps;WORLD_SURFACE", 1) 
+	//if  heightmaps > -1 heightmaps = heightmaps[? "payload"] else heightmaps = nbt_path(chunk, ";", "Level;Heightmaps;WORLD_SURFACE_WG", 1)[? "payload"]
 	
-		} else return -1
+		//} else return -1
+		
+	var buff = buffer_load(chunk_filename)
+	var heightmaps = nbt_get_buffer(buff, ";", ";Level;Heightmaps;WORLD_SURFACE",0)
+	if heightmaps >0 heightmaps = heightmaps[? "payload"] else return -100
 	
 	var block_x = 0
 	var block_z = 0
@@ -50,6 +54,6 @@ function region_display_chunk(chunk_x, chunk_z, pix_x, pix_y, block_textures, re
 		 }
 	}
 	
-	ds_map_destroy(chunk)
+	//ds_map_destroy(heightmaps)
 	
 }

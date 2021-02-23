@@ -18,3 +18,7 @@ camera_scale_y = camera_scale_y_real
 camera_scale_override = false //(True for cutscenes)
 
 global.current_camera_controller = obj_view_move
+
+moving = false
+
+focus_cool=0

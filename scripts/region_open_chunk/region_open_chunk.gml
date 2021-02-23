@@ -58,7 +58,7 @@ if buffer_get_size(region) = 0 return -1 //Make sure buffer isn't empty
 #endregion
 
 	//Determine whether or not the chunk has been generated
-	if length = 0 debug_log("MCANVIL", "Chunk hasn't been generated yet") //show_error("Chunk hasn't been generated yet", false)
+	//if length = 0 debug_log("MCANVIL", "Chunk hasn't been generated yet") //show_error("Chunk hasn't been generated yet", false)
 	if length = 0 return -2
 
 #region Get chunk data and decompress

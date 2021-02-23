@@ -1,1 +1,1 @@
-global.base = current_time
+//global.base = current_time

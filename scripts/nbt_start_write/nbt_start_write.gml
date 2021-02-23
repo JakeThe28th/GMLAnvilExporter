@@ -7,6 +7,7 @@ function nbt_start_write(argument0) {
 	
 	//IF IT STARTS CRASHING WHEN TRYING TO WRITE, CAN SOMEONE REMIND ME THAT I NEED
 	//TO FIX THIS TO DEAL WITH UPDATED STRINGS, BYTE ARRAYS, AND INT/LONG ARRAYS NEED TO BE ADDED
+	show_error("(note to self) havent updated writing NBT yet.", false)
 
 	//var name_length = ds_map_find_value(ds_map, "name_length")
 	//var name = ds_map_find_value(ds_map, "name")

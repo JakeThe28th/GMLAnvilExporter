@@ -48,6 +48,10 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 	if block_id = "minecraft:void_air" return -1
 	if block_id = "minecraft:barrier" return -1
 	
+	if block_id = "minecraft:sign" return -1
+	if block_id = "minecraft:water" return -1
+	if block_id = "minecraft:lava" return -1
+	
 	//block entities
 	if string_pos("sign", block_id) >0 return -1
 	

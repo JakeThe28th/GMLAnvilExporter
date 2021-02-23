@@ -18,21 +18,22 @@
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\Book and Quil\\region\\r.-1.-1.mca")
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\TT0RBIT\\region\\r.0.0.mca")
 //region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\region\\r.-1.-1.mca")
+region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New Wurld (5)\\region\\r.0.0.mca")
 //global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\_OR_\\"
 //global.save_folder = "C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New World\\"
 global.save_folder = "none"
 //buffer_seek(region, buffer_seek_start, 0)
 
 
-//obj_out_dir = nbt_save_dir + "out.obj"
-//mtl_out_dir = nbt_save_dir + "out.mtl"
+obj_out_dir = nbt_save_dir + "out.obj"
+mtl_out_dir = nbt_save_dir + "out.mtl"
 //obj_out_dir = nbt_save_dir + ""
 //mtl_out_dir = nbt_save_dir + ""
-//obj = buffer_create(1, buffer_grow, 1)
-//mtl = file_text_open_write(mtl_out_dir)
-//mtl_index = ds_map_create()
-//vertice_count = 0
-//vertice_texture_count = 0
+obj = buffer_create(1, buffer_grow, 1)
+mtl = file_text_open_write(mtl_out_dir)
+mtl_index = ds_map_create()
+vertice_count = 0
+vertice_texture_count = 0
 //resources = working_directory + "1.16.1"
 resources = "OR" //working_directory + "OR"
 
@@ -49,13 +50,13 @@ global.ma_models_directory = resources + "\\assets\\minecraft\\models"
 global.ma_blockstates_directory = resources + "\\assets\\minecraft\\blockstates"
 
 
-//region_export_chunk(0,0,0,0,resources, region, obj, mtl)
+//region_export_chunk(0,2,0,0,resources, region, obj, mtl)
 //region_export_chunk(-3,-10,0,0,resources, region, obj, mtl)
 
 //region_export_chunk(0,0,0,0,resources, region, obj, mtl)
 
-//buffer_save(obj, obj_out_dir)
-//file_text_close(mtl)
+buffer_save(obj, obj_out_dir)
+file_text_close(mtl)
 
 
 //chunk_sprite_ds = ds_map_create()
@@ -80,3 +81,18 @@ directory_destroy(nbt_save_dir)
 
 instance_create_depth(0, 0, -6, obj_view_move)
 instance_create_depth(0, 0, -6, obj_camera)
+
+step = 0
+
+
+//var buff = buffer_load("hello_world_uncompressed.nbt")
+//buffer_seek(buff, buffer_seek_start, 0)
+//var temp = nbt_get_buffer(buff, ";", "hello world;name",0)
+
+//var buff = buffer_load("bigtest.nbt")
+//buffer_seek(buff, buffer_seek_start, 0)
+//var temp = nbt_get_buffer(buff, ";", "Level;nested compound test;egg;name",0)
+//temp = "e"
+
+
+
