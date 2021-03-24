@@ -94,5 +94,15 @@ step = 0
 //var temp = nbt_get_buffer(buff, ";", "Level;nested compound test;egg;name",0)
 //temp = "e"
 
+global.in_gui = false
+
+global.selected_chunks = ds_map_create()
+global.selected_chunks[? "start_x"] = 0
+global.selected_chunks[? "start_y"] = 0
+	
+global.selected_chunks[? "end_x"] = 0
+global.selected_chunks[? "end_y"] = 0
+ds_map_add_map(global.selected_chunks, "chunks", ds_map_create())
+
 
 

@@ -1,4 +1,4 @@
-
+global.in_gui = false
 if gui_draw_button((vw/2)-(vw/3), 0, (vw/2)+(vw/3), 40, col_normal, col_med_light, string(global.save_folder), device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), "none.") {
 	var file = get_open_filename("Minecraft Level files|*.dat", "level.dat")
 	global.save_folder = filename_path(file)

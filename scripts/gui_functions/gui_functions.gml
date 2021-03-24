@@ -7,6 +7,7 @@ function gui_draw_button(x1, y1, x2, y2, color, hovercolor, text, px, py, menu) 
 	
 	
 	if point_in_area(x1, y1, x2, y2, px, py) and grayed_out_buttons = false {
+		global.in_gui = true
 		if global.current_menu = menu or global.current_menu = false {
 		if mouse_check_button_released(mb_left) state = true
 		

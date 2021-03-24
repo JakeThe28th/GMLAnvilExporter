@@ -36,3 +36,43 @@ do {
 
 #endregion
 	}
+	
+mouse_chunk_x = floor((mouse_x-1)/chunk_size)
+mouse_chunk_y = floor((mouse_y-1)/chunk_size)
+
+if !global.in_gui {
+if mouse_check_button_pressed(mb_left) {
+	start_coords_x = mouse_chunk_x
+	start_coords_y = mouse_chunk_y
+	}
+	
+if mouse_check_button(mb_left) {
+	if mouse_chunk_x = undefined or mouse_chunk_y = undefined {
+		start_coords_x = mouse_chunk_x
+		start_coords_y = mouse_chunk_y
+		} 
+	
+	
+	//draw_rectangle((start_coords_x*chunk_size), (start_coords_y*chunk_size),(mouse_chunk_x*chunk_size)+chunk_size-1, (mouse_chunk_y*chunk_size)+chunk_size-1, false)
+	global.selected_chunks[? "start_x"] = start_coords_x
+	global.selected_chunks[? "start_y"] = start_coords_y
+	
+	global.selected_chunks[? "end_x"] = mouse_chunk_x
+	global.selected_chunks[? "end_y"] = mouse_chunk_y
+	}
+	
+if mouse_check_button_released(mb_left) {
+	global.selected_chunks[? "start_x"] = start_coords_x
+	global.selected_chunks[? "start_y"] = start_coords_y
+	
+	global.selected_chunks[? "end_x"] = mouse_chunk_x
+	global.selected_chunks[? "end_y"] = mouse_chunk_y
+	}
+	
+}
+
+draw_set_alpha(.5)
+draw_rectangle((global.selected_chunks[? "start_x"]*chunk_size), (global.selected_chunks[? "start_y"]*chunk_size),(global.selected_chunks[? "end_x"]*chunk_size)+chunk_size-1, (global.selected_chunks[? "end_y"]*chunk_size)+chunk_size-1, false)
+
+draw_rectangle((mouse_chunk_x*chunk_size), (mouse_chunk_y*chunk_size),(mouse_chunk_x*chunk_size)+chunk_size-1, (mouse_chunk_y*chunk_size)+chunk_size-1, false)
+draw_set_alpha(1)
