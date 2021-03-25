@@ -19,14 +19,14 @@ function mc2obj_mtl(mtl, mtl_index, texture_name, texture_path) {
 				//file_text_writeln(mtl)
 				//file_text_write_string(mtl, "Ks 0 0 0")
 				//file_text_writeln(mtl)
-				file_text_write_string(mtl, "# map_Ka " + texture_path)
-				file_text_writeln(mtl)
+				//file_text_write_string(mtl, "# map_Ka " + texture_path)
+				//file_text_writeln(mtl)
 				//file_text_write_string(mtl, "# for G3D, to make textures look blocky:")
 				//file_text_writeln(mtl)
 				//file_text_write_string(mtl, "interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION")
 				//file_text_writeln(mtl)
-				//file_text_write_string(mtl, "map_Kd " + texture_path)
-				//file_text_writeln(mtl)
+				file_text_write_string(mtl, "map_Kd " + texture_path)
+				file_text_writeln(mtl)
 				//file_text_write_string(mtl, "# illum 2")
 				//file_text_writeln(mtl)
 				//file_text_write_string(mtl, "# d 1")
@@ -273,7 +273,7 @@ function mc2obj_model(bx, by, bz, json, buffer, v_count, vt_count, cullfaces, mt
 		var elements = ds_map_find_value(json_ds, "elements")
 		var iElement = 0
 		
-		
+		if elements != undefined {
 		repeat ds_list_size(elements) {
 		//Get the current element, then get it's faces.
 		var element = elements[| iElement]	
@@ -591,10 +591,12 @@ function mc2obj_model(bx, by, bz, json, buffer, v_count, vt_count, cullfaces, mt
 	
 		iElement++
 		}
+			
+		} else debug_log("MC2OBJ", "Undefined elements: " + json)
 	#endregion
 
-	vertice_count = v_count
-	vertice_texture_count = vt_count
+	obj_main.vertice_count = v_count
+	obj_main.vertice_texture_count = vt_count
 	
 	if json_ds[? "parent"] !=undefined ds_map_destroy(parent) //Can't delete earlier due to json deleting it's children
 	ds_map_destroy(json_ds)

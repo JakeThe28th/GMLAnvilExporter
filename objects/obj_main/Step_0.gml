@@ -86,3 +86,82 @@ if current_time < timer + ideal {
 
 #endregion
 	}
+	
+	
+if global.save_folder != "none" {
+	if keyboard_check_released(ord("E")) {
+		var ix = global.selected_chunks[? "start_x"]
+		var iz = global.selected_chunks[? "start_y"]
+		
+		var xsize = order_least_greatest(global.selected_chunks[? "start_x"], global.selected_chunks[? "end_x"])
+		var ysize = order_least_greatest(global.selected_chunks[? "start_y"], global.selected_chunks[? "end_y"])
+		
+		var xsize = (xsize[1] - xsize[0])+1
+		var ysize = (ysize[1] - ysize[0])+1
+		
+		
+		obj_out_dir = nbt_save_dir + "out.obj"
+		mtl_out_dir = nbt_save_dir + "out.mtl"
+		//obj_out_dir = nbt_save_dir + ""
+		//mtl_out_dir = nbt_save_dir + ""
+		obj = buffer_create(1, buffer_grow, 1)
+		mtl = file_text_open_write(mtl_out_dir)
+		mtl_index = ds_map_create()
+		vertice_count = 0
+		vertice_texture_count = 0
+		//resources = working_directory + "1.16.1"
+		resources = "OR" //working_directory + "OR"
+		
+		chunks = ds_map_create()
+		
+		totalBlocksDone = 0
+		totalBlocksToDo = 0
+		
+		repeat xsize*ysize {
+			
+			instance_create_depth(ix, iz, -500, obj_export_chunk_1_16)
+			
+			ix++
+			if ix >= global.selected_chunks[? "start_x"] + xsize {
+				ix = global.selected_chunks[? "start_x"]
+				iz++
+				}
+			}
+		
+		}
+	}
+	
+if chunks != -1 {
+		var ix = global.selected_chunks[? "start_x"]
+		var iz = global.selected_chunks[? "start_y"]
+		
+		var xsize = order_least_greatest(global.selected_chunks[? "start_x"], global.selected_chunks[? "end_x"])
+		var ysize = order_least_greatest(global.selected_chunks[? "start_y"], global.selected_chunks[? "end_y"])
+		
+		var xsize = (xsize[1] - xsize[0])+1
+		var ysize = (ysize[1] - ysize[0])+1
+		
+		var isItAllDone = 1
+		
+		export_chunk_count = xsize*ysize
+		//totalBlocksDone = 0
+		//totalBlocksToDo = 0
+		
+		repeat xsize*ysize {
+			
+			if chunks[? string(ix) + ";" + string(iz)] = undefined isItAllDone = -1
+			if isItAllDone = -1 break;
+			ix++
+			if ix >= global.selected_chunks[? "start_x"] + xsize {
+				ix = global.selected_chunks[? "start_x"]
+				iz++
+				}
+			}
+			
+		if isItAllDone = true {
+			buffer_save(obj, obj_out_dir)
+			file_text_close(mtl)
+			ds_map_destroy(chunks)
+			chunks = -1
+			}
+	}

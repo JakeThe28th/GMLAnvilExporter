@@ -25,7 +25,7 @@ function nbt_path(ds, seperator, path, start_type) {
 		name_i-=1
 			
 		if name_i >= ds_list_size(ds) return -1
-		//if name_temp != path[i] return -1
+		if name_temp != path[i] return -1
 		
 		ds = ds[| name_i]
 		start_type = true

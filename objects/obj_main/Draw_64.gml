@@ -25,4 +25,19 @@ if gui_draw_button((vw/2)-(vw/3), 0, (vw/2)+(vw/3), 40, col_normal, col_med_ligh
 		
 	}
 
+if chunks > -1 {
+	
+var pb_x1 = window_get_width()/10,
+var pb_x2 = window_get_width()-(window_get_width()/10)
+var pb_y1 = window_get_height()-5
+var pb_y2 = window_get_height()-40
+draw_rectangle(pb_x1, pb_y1, pb_x2, pb_y2, false)
+draw_set_color(c_lime)
 
+//var tdo = 10
+//var done = 5
+var percentage = (pb_x2-pb_x1)/(totalBlocksToDo/totalBlocksDone)
+var merge = (totalBlocksDone/totalBlocksToDo)
+draw_rectangle_color(pb_x1, pb_y1, pb_x1+percentage, pb_y2, c_red,  merge_color(c_red, c_lime, merge), merge_color(c_red, c_lime, merge), c_red, false)
+draw_set_color(c_white)
+	}

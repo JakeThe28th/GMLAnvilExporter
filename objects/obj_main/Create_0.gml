@@ -24,6 +24,7 @@ region = buffer_load("C:\\Users\\nickl\\AppData\\Roaming\\.minecraft\\saves\\New
 global.save_folder = "none"
 //buffer_seek(region, buffer_seek_start, 0)
 
+chunks = -1
 
 obj_out_dir = nbt_save_dir + "out.obj"
 mtl_out_dir = nbt_save_dir + "out.mtl"
@@ -106,3 +107,7 @@ ds_map_add_map(global.selected_chunks, "chunks", ds_map_create())
 
 
 
+totalBlocksDone = 1
+totalBlocksToDo = 1
+
+started_coords = false

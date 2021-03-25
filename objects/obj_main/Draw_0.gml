@@ -40,13 +40,14 @@ do {
 mouse_chunk_x = floor((mouse_x-1)/chunk_size)
 mouse_chunk_y = floor((mouse_y-1)/chunk_size)
 
-if !global.in_gui {
+if !global.in_gui and chunks = -1 {
 if mouse_check_button_pressed(mb_left) {
 	start_coords_x = mouse_chunk_x
 	start_coords_y = mouse_chunk_y
+	started_coords = true
 	}
 	
-if mouse_check_button(mb_left) {
+if mouse_check_button(mb_left) and started_coords {
 	if mouse_chunk_x = undefined or mouse_chunk_y = undefined {
 		start_coords_x = mouse_chunk_x
 		start_coords_y = mouse_chunk_y
@@ -61,7 +62,7 @@ if mouse_check_button(mb_left) {
 	global.selected_chunks[? "end_y"] = mouse_chunk_y
 	}
 	
-if mouse_check_button_released(mb_left) {
+if mouse_check_button_released(mb_left) and started_coords{
 	global.selected_chunks[? "start_x"] = start_coords_x
 	global.selected_chunks[? "start_y"] = start_coords_y
 	
