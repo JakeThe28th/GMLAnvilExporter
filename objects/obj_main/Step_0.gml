@@ -22,7 +22,7 @@ chunk_z_view = floor(obj_camera.y/16)
 display_set_gui_size(window_get_width(), window_get_height())
 
 
-if global.save_folder != "none" {
+if global.save_folder != "none" and chunk = -1 {
 #region Display chunks
 var ideal = (1/480) * 1000
 var timer = current_time

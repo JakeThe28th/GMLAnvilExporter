@@ -2,13 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function region_block_is_transparent(block_x, block_y, block_z, blockstates, ind_size, air, palette) {
 	
-	if block_x < 0 return 1
-	if block_y < 0 return 1
-	if block_z < 0 return 1
-	if block_x > chunk_size-1 return 1
-	if block_y > chunk_size-1 return 1
-	if block_z > chunk_size-1 return 1
-	
+	if block_x < 0  || block_y < 0 || block_z < 0 || block_x > chunk_size-1 || block_y > chunk_size-1 || block_z > chunk_size-1 return 1
 	var temp = region_blockstates_get_index(block_x, block_y, block_z, blockstates, ind_size)
 	
 	if temp = air return 1

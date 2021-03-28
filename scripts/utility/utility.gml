@@ -163,7 +163,7 @@ function order_least_greatest(num1, num2) {
 				}
 			
 			
-		var array = array_create(2, "")
+		var array = array_create(2, 0)
 	
 		array[0] = outnum1
 		array[1] = outnum2

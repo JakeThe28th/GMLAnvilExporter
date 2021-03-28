@@ -1,5 +1,4 @@
-		
-		if i < ds_list_size(section_list) {
+	if i < ds_list_size(section_list) {
 			
 		if startOFLoop {
 		//repeat ds_list_size(section_list) {
@@ -8,8 +7,8 @@
 		
 		section_y = nbt_path(current_section, ";","Y",0)[? "payload"]
 		
-		buffer_write(obj, buffer_text,"o Section_"+string(section_y))
-		buffer_write(obj, buffer_text, chr($000D) + chr($000A))
+		//buffer_write(obj, buffer_text,"o Section_"+string(section_y))
+		//buffer_write(obj, buffer_text, chr($000D) + chr($000A))
 		
 
 		#region Relative to chunk section block coords
@@ -59,7 +58,7 @@
 		}
 		
 		//Loop through blocks.
-		var time_per_step = ((1/6)*1000)/obj_main.export_chunk_count
+		var time_per_step = ((1/2)*1000)/obj_main.export_chunk_count
 		var timer = current_time + time_per_step
 		
 		repeat 1000 {
@@ -103,13 +102,16 @@
 				
 			#endregion
 				
-			block = string(states + "|" + block_id)
+			//block = string(states + "|" + block_id)
+			block = array_create(2, -1)
+			block[0] = states
+			block[1] = block_id
 			
 			#endregion
 		
-			if block != -1 {
+			//	if block != -1 {
 				
-			if is_string(block) block = split_string(block, "|")
+			//if is_string(block) block = split_string(block, "|")
 			
 			//Coords for .obj	
 			bl_off_x = block_x + chunk_exp_x //Offset the X coordinate
@@ -130,7 +132,7 @@
 			//Create block .obj
 			mc2obj_state(bl_off_x,bl_off_y,bl_off_z,block[1],block[0],obj,obj_main.vertice_count,obj_main.vertice_texture_count,cullfaces,mtl,mtl_index)
 			
-			}
+			//}
 			
 			}
 			
@@ -152,21 +154,17 @@
 
 					
 			if block_x = "done" {
-			
-			startOFLoop = true
-			
-			i++
-			debug_log("INFO", "section done" + string(section_y))
-			
+				startOFLoop = true
+				i++
+				debug_log("INFO", "section done" + string(section_y))
 			}
 			
-			if current_time > timer break;
-			if block_x = "done" break;
-			
+			if current_time > timer or block_x = "done" break;
 		}
 			
 		} else {
 			obj_main.chunks[? string(x) + ";" + string(y)] = 1
+			obj_main.export_chunk_count-=1
 			instance_destroy()
 				}
 		

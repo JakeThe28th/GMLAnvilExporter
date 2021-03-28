@@ -56,17 +56,6 @@ function mc2obj_state(bx, by, bz, block_id, block_states, buffer, v_count, vt_co
 	if string_pos("sign", block_id) >0 return -1
 	
 	
-	if string_pos("bedrock", block_id) > 0 {
-				var error = "e"
-				}
-				
-	if string_pos("water", block_id) > 0 {
-				var error = "e"
-				}
-				
-	if string_pos("lava", block_id) > 0 {
-				var error = "e"
-				}
 
 	
 	var file = global.ma_blockstates_directory + "\\" + string_replace(block_id,"minecraft:","") + ".json"

@@ -1,4 +1,4 @@
-if global.save_folder != "none" {
+if global.save_folder != "none" and chunks = -1 {
 #region Display chunks
 var scale = 1
 

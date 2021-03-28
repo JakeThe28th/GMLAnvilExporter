@@ -10,8 +10,8 @@ cullfaces = ds_map_create()
 //function region_export_chunk(chunk_x, chunk_z, chunk_exp_x, chunk_exp_z, resources_dir, region, obj, mtl) {
 	chunk_x = x
 	chunk_z = y
-	chunk_exp_x = x
-	chunk_exp_z = y
+	chunk_exp_x = x*16
+	chunk_exp_z = y*16
 	
 	resources_dir = working_directory + "OR"
 	

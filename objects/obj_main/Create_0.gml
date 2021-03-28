@@ -111,3 +111,5 @@ totalBlocksDone = 1
 totalBlocksToDo = 1
 
 started_coords = false
+
+chunk = -1
